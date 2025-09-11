@@ -1,4 +1,5 @@
 import React, { useMemo, useRef, useState } from "react";
+import emailjs from 'emailjs-com';
 
 // ExpertEmbed — lightweight single-file React landing page
 // Styling uses Tailwind (no import needed in this environment)
@@ -451,31 +452,67 @@ function EarlyAccessForm() {
   const [name, setName] = useState("");
   const [sent, setSent] = useState(false);
   const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submittedData, setSubmittedData] = useState(null);
 
-  const submit = (e) => {
+  // Prefer environment variables (Create React App style) with hard‑coded fallback for local dev
+  const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID || 'service_el8ixrs';
+  const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'template_t7wts2m';
+  const PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'nmG_8kMJ6PofAHE3-';
+
+  const validate = () => {
+    if (!email) return 'Email is required.';
+    const emailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.trim());
+    if (!emailOk) return 'Enter a valid email.';
+    if (name && name.length > 80) return 'Name seems too long.';
+    return null;
+  };
+
+  const submit = async (e) => {
     e.preventDefault();
-    setError(null);
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError("Please enter a valid email.");
+    const vError = validate();
+    if (vError) {
+      setError(vError);
       return;
     }
-    // Demo POST: In production, replace with your API endpoint
-    // Here we just simulate a successful submission
-    setTimeout(() => setSent(true), 300);
+    setError(null);
+    setIsSubmitting(true);
+
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          user_email: email,
+          user_name: name || 'Unknown',
+          message: `EXPERT-EMBED: New early access request from ${name || 'Unknown'} <${email}>`,
+        },
+        PUBLIC_KEY
+      );
+      setSubmittedData({ email, name });
+      setSent(true);
+      setEmail('');
+      setName('');
+    } catch (err) {
+      console.error('Error sending email:', err);
+      setError('Something went wrong. Please retry in a moment.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (sent) {
     return (
       <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-6">
         <div className="text-lg font-semibold">You’re on the list! 🎉</div>
-        <p className="mt-1 text-slate-300">We’ll email {name ? name + " " : ""}at {email} with beta details.</p>
-        <button onClick={() => { setEmail(""); setName(""); setSent(false); }} className="mt-4 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-sm">Add another</button>
+        <p className="mt-1 text-slate-300">We’ll email {submittedData?.name ? submittedData.name + ' ' : ''}at {submittedData?.email} with beta details.</p>
+        <button onClick={() => { setSent(false); setSubmittedData(null); setError(null); }} className="mt-4 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-sm">Add another</button>
       </div>
     );
   }
 
   return (
-    <form onSubmit={submit} className="mt-6 grid sm:grid-cols-3 gap-3">
+    <form onSubmit={submit} className="mt-6 grid sm:grid-cols-3 gap-3" noValidate>
       <input
         type="text"
         placeholder="Your name"
@@ -493,9 +530,15 @@ function EarlyAccessForm() {
       />
       <button
         type="submit"
-        className="px-4 py-3 rounded-2xl bg-gradient-to-r from-fuchsia-500 to-cyan-400 text-slate-900 font-semibold hover:brightness-110 transition"
+        disabled={isSubmitting}
+        className={
+          "px-4 py-3 rounded-2xl font-semibold transition " +
+          (isSubmitting
+            ? "bg-white/10 border border-white/10 text-slate-400 cursor-not-allowed"
+            : "bg-gradient-to-r from-fuchsia-500 to-cyan-400 text-slate-900 hover:brightness-110")
+        }
       >
-        Request access
+        {isSubmitting ? 'Sending…' : 'Request access'}
       </button>
       {error && <div className="sm:col-span-3 text-left text-sm text-rose-300">{error}</div>}
     </form>

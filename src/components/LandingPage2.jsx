@@ -1,16 +1,17 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState, useEffect } from "react";
 import emailjs from 'emailjs-com';
-
-// ExpertEmbed — lightweight single-file React landing page
-// Styling uses Tailwind (no import needed in this environment)
-// Copy + paste into a React app (e.g., Vite/Next). No external UI libs required.
 
 export default function LandingPage() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState("E‑commerce");
-  const [faqOpen, setFaqOpen] = useState(null);
+  const [faqOpen, setFaqOpen] = useState(null); // which FAQ id is open
   const heroRef = useRef(null);
+  const [planInterest, setPlanInterest] = useState(null); // Which pricing tier the visitor clicked
+
+  useEffect(() => {
+    document.title = 'Frontline AI – 24/7 Embedded AI Expert';
+  }, []);
 
   const features = [
     {
@@ -63,60 +64,77 @@ export default function LandingPage() {
     },
   ];
 
-  // const pricing = [
-  //   {
-  //     plan: "Free",
-  //     price: "$0",
-  //     sub: "Great for testing",
-  //     features: ["1 bot", "100 messages/mo", "Starter templates"],
-  //     cta: "Start Free",
-  //     popular: false,
-  //   },
-  //   {
-  //     plan: "Starter",
-  //     price: "$19",
-  //     sub: "For growing sites",
-  //     features: ["3 bots", "1,000 messages/mo", "Custom prompts", "Email support"],
-  //     cta: "Choose Starter",
-  //     popular: true,
-  //   },
-  //   {
-  //     plan: "Pro",
-  //     price: "$49",
-  //     sub: "Serious volume",
-  //     features: [
-  //       "Unlimited bots",
-  //       "5,000 messages/mo",
-  //       "Priority support",
-  //       "Advanced customization",
-  //     ],
-  //     cta: "Go Pro",
-  //     popular: false,
-  //   },
-  // ];
+  const pricing = [
+    {
+      plan: "Free",
+      price: "$0",
+      sub: "Great for testing",
+      features: ["1 bot", "100 messages/mo", "Starter templates"],
+      cta: "Start Free",
+      popular: false,
+  suggested: true,
+    },
+    {
+      plan: "Starter",
+      price: "$19",
+      sub: "For growing sites",
+      features: ["3 bots", "1,000 messages/mo", "Custom prompts", "Email support"],
+      cta: "Choose Starter",
+      popular: true,
+  suggested: true,
+    },
+    {
+      plan: "Pro",
+      price: "$49",
+      sub: "Serious volume",
+      features: [
+        "Unlimited bots",
+        "5,000 messages/mo",
+        "Priority support",
+        "Advanced customization",
+      ],
+      cta: "Go Pro",
+      popular: false,
+  suggested: true,
+    },
+  ];
 
   const faqs = [
     {
-      q: "Do I need training or fine‑tuning?",
-      a: "No. ExpertEmbed combines strong prompts with your uploaded content. That’s enough for accurate, on‑brand answers in most SMB use‑cases.",
+      id: 'what',
+      q: 'What is Frontline AI?',
+      a: 'A lightweight widget that turns your existing docs, policies and product info into a 24/7 on‑site expert. No model training required—just upload, customize, paste one line.'
     },
     {
-      q: "How do I embed it?",
-      a: "Paste a single <script> tag before </body> or use our React component. You’ll get copy‑ready code inside the dashboard.",
+      id: 'how-work',
+      q: 'How does it work?',
+      a: 'We index only the relevant text you upload (PDFs, FAQs, markdown, plain text). Prompts + retrieval ground every answer. You stay in control of tone, safe topics, and branding.'
     },
     {
-      q: "Which models are supported?",
-      a: "We integrate leading providers and choose the best default for reliability and cost. You can override in settings.",
+      id: 'no-training',
+      q: 'Do I need to fine‑tune a model?',
+      a: 'No—modern base models + retrieval + guardrails is enough for most SMB and mid‑market use cases. You can swap providers in settings later.'
     },
     {
-      q: "Can I control the voice?",
-      a: "Yes—pick a template tone (concise, friendly, expert) or write your own brand voice. You can also restrict topics or add guardrails.",
+      id: 'sources',
+      q: 'What content sources can I add?',
+      a: 'Start with drag‑and‑drop files or pasted text. Roadmap: sitemap crawl, Notion, Google Drive, and help desk integrations.'
+    },
+    {
+      id: 'safety',
+      q: 'How do you keep answers on‑brand & safe?',
+      a: 'Layered prompt rules, source grounding, optional topic blocks, and rate/length limits. You can review sample questions before going live.'
+    },
+    {
+      id: 'pricing-faq',
+      q: 'How will pricing evolve after beta?',
+      a: 'We collect anonymous plan interest + usage to tune limits. Early adopters keep founder rates for 12 months even if public pricing changes.'
     },
   ];
 
   const embedSnippet = useMemo(
     () =>
-      `<!-- ExpertEmbed: paste near </body> -->\n<script>\n  window.expertEmbed = {\n    botId: "YOUR_BOT_ID",\n    theme: { primary: "#6D28D9", accent: "#22D3EE" },\n    greeting: "Hi! I’m your 24/7 product expert—ask me anything.",\n  };\n</script>\n<script src="https://cdn.example.com/expert-embed.min.js" defer></script>`,
+      `<!-- Frontline AI widget: paste near </body> -->\n<script>\n  window.frontlineAI = {\n    botId: "YOUR_BOT_ID",\n    theme: { primary: "#6D28D9", accent: "#22D3EE" },\n    greeting: "Hi! I’m your 24/7 frontline product expert—ask me anything.",\n  };\n</script>\n<script src="https://cdn.frontline-ai.store/frontline-ai-widget.min.js" defer></script>`,
     []
   );
 
@@ -137,7 +155,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
           <div className="flex items-center gap-3">
             <div className="h-8 w-8 rounded-2xl bg-gradient-to-br from-fuchsia-500 to-cyan-400 shadow-md" />
-            <span className="font-semibold tracking-tight">ExpertEmbed</span>
+            <span className="font-semibold tracking-tight">Frontline AI</span>
           </div>
           <nav className="hidden md:flex items-center gap-8 text-slate-300">
             <a href="#features" className="hover:text-white">Features</a>
@@ -147,7 +165,6 @@ export default function LandingPage() {
             <a href="#faq" className="hover:text-white">FAQ</a>
           </nav>
           <div className="hidden md:flex items-center gap-3">
-            <a href="#cta" className="text-sm px-4 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 transition">Log in</a>
             <a href="#cta" className="text-sm px-4 py-1.5 rounded-xl bg-gradient-to-r from-fuchsia-500 to-cyan-400 hover:brightness-110 transition shadow">Get early access</a>
           </div>
           <button
@@ -192,10 +209,10 @@ export default function LandingPage() {
               Seeking Early Adopters <span className="text-[9px]">•</span> Free beta access
             </p>
             <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">
-              Turn your website into a <span className="bg-gradient-to-r from-fuchsia-400 to-cyan-300 bg-clip-text text-transparent">24/7 expert</span>
+              Turn your website into a <span className="bg-gradient-to-r from-fuchsia-400 to-cyan-300 bg-clip-text text-transparent">24/7 frontline expert</span>
             </h1>
             <p className="mt-5 text-lg text-slate-300 max-w-xl">
-              ExpertEmbed lets any business spin up a custom AI consultant that understands your industry, products, and policies—then embed it on your site in minutes.
+              Frontline AI lets any business spin up a custom AI consultant that understands your industry, products, and policies—then embed it on your site in minutes.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <a href="#cta" className="px-6 py-3 rounded-2xl bg-gradient-to-r from-fuchsia-500 to-cyan-400 text-slate-900 font-semibold shadow hover:brightness-110 transition">Get early access</a>
@@ -208,27 +225,34 @@ export default function LandingPage() {
               <div className="absolute -top-3 -left-3 px-2 py-1 text-xs rounded-md bg-gradient-to-r from-fuchsia-500 to-cyan-400 text-slate-900 font-semibold shadow">Live demo</div>
               <div className="rounded-2xl overflow-hidden border border-white/10">
                 {/* Widget mock */}
-                <div className="grid md:grid-cols-2">
-                  <div className="p-4 bg-slate-950">
-                    <div className="text-xs text-slate-400">Embed snippet</div>
-                    <pre className="mt-2 text-[11px] leading-5 bg-black/60 p-3 rounded-xl border border-white/10 overflow-auto">
-{embedSnippet}
-                    </pre>
-                    <button onClick={copy} className="mt-3 text-xs px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10">
-                      {copied ? "Copied ✓" : "Copy snippet"}
-                    </button>
-                  </div>
-                  <div className="p-4 bg-slate-900/60">
-                    <div className="text-xs text-slate-400">Conversation preview</div>
-                    <div className="mt-2 h-64 rounded-xl border border-white/10 p-3 bg-gradient-to-b from-slate-900 to-slate-950 flex flex-col">
-                      <div className="mt-3 flex-1 space-y-2 overflow-y-auto">
-                        <ChatBubble who="bot" text="Hi! I’m your 24/7 product expert—how can I help?" />
-                        <ChatBubble who="user" text="Which plan should I pick for ~2k chats/mo?" />
-                        <ChatBubble who="bot" text="Starter covers 1k/mo. For ~2k, choose Pro—5k messages with unlimited bots. I can also email you usage tips." />
+                <div>
+                  <div className="grid grid-cols-1 md:grid-cols-2">
+                    {/* Snippet panel */}
+                    <div className="p-4 bg-slate-950">
+                      <div className="text-xs text-slate-400 flex items-center justify-between">
+                        <span>Embed snippet</span>
+                        <span className="hidden md:inline text-[10px] text-slate-500">Place before closing body tag</span>
                       </div>
-                      <div className="mt-3 flex gap-2">
-                        <input className="flex-1 px-3 py-2 rounded-lg bg-white/10 border border-white/10 outline-none placeholder:text-slate-500" placeholder="Ask anything…" />
-                        <button className="px-3 py-2 rounded-lg bg-gradient-to-r from-fuchsia-500 to-cyan-400 text-slate-900 font-semibold">Send</button>
+                      <pre className="mt-2 text-[10px] sm:text-[11px] leading-5 bg-black/60 p-3 rounded-xl border border-white/10 overflow-x-auto overflow-y-hidden w-full max-w-full whitespace-pre font-mono">
+{embedSnippet}
+                      </pre>
+                      <button onClick={copy} className="mt-3 text-xs px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 w-full md:w-auto">
+                        {copied ? 'Copied ✓' : 'Copy snippet'}
+                      </button>
+                    </div>
+                    {/* Conversation panel */}
+                    <div className="p-4 bg-slate-900/60">
+                      <div className="text-xs text-slate-400">Conversation preview</div>
+                      <div className="mt-2 h-64 rounded-xl border border-white/10 p-3 bg-gradient-to-b from-slate-900 to-slate-950 flex flex-col">
+                        <div className="mt-3 flex-1 space-y-2 overflow-y-auto pr-1">
+                          <ChatBubble who='bot' text='Hi! I’m your 24/7 frontline product expert—how can I help?' />
+                          <ChatBubble who='user' text='Which plan should I pick for ~2k chats/mo?' />
+                          <ChatBubble who='bot' text='Starter covers 1k/mo. For ~2k, choose Pro—5k messages with unlimited bots. I can also email you usage tips.' />
+                        </div>
+                        <div className="mt-3 flex gap-2">
+                          <input className="flex-1 px-3 py-2 rounded-lg bg-white/10 border border-white/10 outline-none placeholder:text-slate-500" placeholder="Ask anything…" />
+                          <button className="px-3 py-2 rounded-lg bg-gradient-to-r from-fuchsia-500 to-cyan-400 text-slate-900 font-semibold">Send</button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -338,52 +362,82 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing */}
-      {/* <section id="pricing" className="py-20 border-t border-white/5">
+      <section id="pricing" className="py-20 border-t border-white/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <h2 className="text-3xl font-bold tracking-tight">Simple, honest pricing</h2>
-            <p className="mt-3 text-slate-300">Start free. Upgrade as you grow. Cancel anytime.</p>
+            <p className="mt-3 text-slate-300">Indicative beta pricing — lock these founder rates for 12 months by joining early.</p>
           </div>
-          <div className="mt-10 grid md:grid-cols-3 gap-6">
-            {pricing.map((p) => (
-              <div key={p.plan} className={
-                "rounded-3xl border p-6 bg-white/5 border-white/10 shadow flex flex-col " +
-                (p.popular ? "ring-2 ring-cyan-400/70" : "")
-              }>
-                {p.popular && (
-                  <div className="-mt-8 mb-2 self-start px-3 py-1 text-xs rounded-xl bg-gradient-to-r from-fuchsia-500 to-cyan-400 text-slate-900 font-semibold shadow">
-                    Most popular
+          <div className="mt-10 grid md:grid-cols-3 gap-6 items-stretch">
+            {pricing.map((p) => {
+              const active = planInterest === p.plan;
+              return (
+                <div
+                  key={p.plan}
+                  className={
+                    "rounded-3xl border p-6 bg-white/5 border-white/10 shadow flex flex-col relative transition " +
+                    (p.popular ? "ring-2 ring-cyan-400/70 " : "") +
+                    (active ? "ring-2 ring-fuchsia-400 " : "")
+                  }
+                >
+                  {p.popular && (
+                    <div className="-mt-8 mb-2 self-start px-3 py-1 text-xs rounded-xl bg-gradient-to-r from-fuchsia-500 to-cyan-400 text-slate-900 font-semibold shadow">
+                      Most popular
+                    </div>
+                  )}
+                  {active && (
+                    <div className="absolute top-2 right-2 text-[10px] px-2 py-0.5 rounded-full bg-fuchsia-500/20 border border-fuchsia-400/40 text-fuchsia-300">Selected</div>
+                  )}
+                  <h3 className="font-semibold text-lg flex items-center gap-2">
+                    {p.plan}
+                    {p.suggested && <span className="text-[10px] font-normal px-1.5 py-0.5 rounded-md bg-white/10 border border-white/10">beta</span>}
+                  </h3>
+                  <div className="mt-2 flex items-baseline gap-1">
+                    <span className="text-4xl font-extrabold">{p.price}</span>
+                    <span className="text-slate-400">/mo</span>
                   </div>
-                )}
-                <h3 className="font-semibold text-lg">{p.plan}</h3>
-                <div className="mt-2 flex items-baseline gap-1">
-                  <span className="text-4xl font-extrabold">{p.price}</span>
-                  <span className="text-slate-400">/mo</span>
+                  <p className="mt-1 text-sm text-slate-300">{p.sub}</p>
+                  <ul className="mt-4 text-sm text-slate-300 space-y-2 flex-1">
+                    {p.features.map((f) => (
+                      <li key={f} className="flex items-start gap-2">
+                        <span className="mt-[3px]">✅</span>
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setPlanInterest(p.plan);
+                      const el = document.getElementById('cta');
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className={
+                      "mt-6 inline-block text-center w-full px-4 py-2 rounded-xl font-semibold transition " +
+                      (active
+                        ? "bg-white/10 border border-white/20 text-white"
+                        : "bg-gradient-to-r from-fuchsia-500 to-cyan-400 text-slate-900 hover:brightness-110")
+                    }
+                  >
+                    {active ? 'Selected' : p.cta}
+                  </button>
                 </div>
-                <p className="mt-1 text-sm text-slate-300">{p.sub}</p>
-                <ul className="mt-4 text-sm text-slate-300 space-y-2">
-                  {p.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2">
-                      <span className="mt-[3px]">✅</span>
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-                <a href="#cta" className="mt-6 inline-block text-center px-4 py-2 rounded-xl bg-gradient-to-r from-fuchsia-500 to-cyan-400 text-slate-900 font-semibold hover:brightness-110 transition">
-                  {p.cta}
-                </a>
-              </div>
-            ))}
+              );
+            })}
+          </div>
+          <div className="mt-6 text-xs text-slate-400 space-y-1 max-w-xl">
+            <p>These are provisional founder rates used to test positioning. We collect which plan visitors click before signup to gauge intent — a common early-stage pricing validation tactic.</p>
+            <p>After beta we may adjust limits & pricing based on usage patterns and feedback; early adopters keep their locked rate for 12 months.</p>
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* CTA */}
       <section id="cta" className="py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold tracking-tight">Shape ExpertEmbed with us</h2>
+          <h2 className="text-3xl font-bold tracking-tight">Shape Frontline AI with us</h2>
           <p className="mt-3 text-slate-300">Join the beta. Get early access, priority feedback loops, and a founder channel.</p>
-          <EarlyAccessForm />
+          <EarlyAccessForm planInterest={planInterest} />
           <div className="mt-3 text-xs text-slate-400">We’ll only email about the beta. No spam.</div>
         </div>
       </section>
@@ -392,21 +446,33 @@ export default function LandingPage() {
       <section id="faq" className="py-20 border-t border-white/5">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold tracking-tight text-center">FAQ</h2>
-          <div className="mt-8 divide-y divide-white/10 rounded-2xl border border-white/10 bg-white/5">
-            {faqs.map(({ q, a }) => (
-              <details
-                key={q}
-                open={faqOpen === q}
-                onToggle={(e) => setFaqOpen((e.target).open ? q : null)}
-                className="group p-4"
-              >
-                <summary className="cursor-pointer list-none flex items-center justify-between">
-                  <span className="font-semibold">{q}</span>
-                  <span className="text-slate-400 group-open:rotate-180 transition">⌄</span>
-                </summary>
-                <p className="mt-2 text-sm text-slate-300">{a}</p>
-              </details>
-            ))}
+          <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
+            {faqs.map(({ id, q, a }, i) => {
+              const open = faqOpen === id;
+              return (
+                <div key={id} className={(i ? 'border-t border-white/10 ' : '') + 'group'}>
+                  <button
+                    onClick={() => setFaqOpen(open ? null : id)}
+                    aria-expanded={open}
+                    aria-controls={`faq-panel-${id}`}
+                    className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400/60 transition"
+                  >
+                    <span className="font-semibold pr-4 flex-1 text-sm sm:text-base">{q}</span>
+                    <span className={'text-slate-400 text-sm transition transform ' + (open ? 'rotate-180' : '')}>⌄</span>
+                  </button>
+                  <div
+                    id={`faq-panel-${id}`}
+                    role="region"
+                    aria-labelledby={`faq-button-${id}`}
+                    className={'grid transition-all duration-300 ' + (open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0')}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="px-5 pb-5 text-sm text-slate-300 leading-relaxed">{a}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -416,7 +482,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-400">
           <div className="flex items-center gap-3">
             <div className="h-6 w-6 rounded-xl bg-gradient-to-br from-fuchsia-500 to-cyan-400" />
-            <span>© {new Date().getFullYear()} ExpertEmbed</span>
+            <span>© {new Date().getFullYear()} Frontline AI</span>
           </div>
           <div className="flex items-center gap-6">
             {/* <a href="#" className="hover:text-white">Terms</a>
@@ -447,7 +513,7 @@ function ChatBubble({ who, text }) {
   );
 }
 
-function EarlyAccessForm() {
+function EarlyAccessForm({ planInterest }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [sent, setSent] = useState(false);
@@ -485,7 +551,8 @@ function EarlyAccessForm() {
         {
           user_email: email,
           user_name: name || 'Unknown',
-          message: `EXPERT-EMBED: New early access request from ${name || 'Unknown'} <${email}>`,
+          interested_plan: planInterest || 'None selected',
+          message: `FRONTLINE-AI: New early access request from ${name || 'Unknown'} <${email}> | Interested plan: ${planInterest || 'N/A'}`,
         },
         PUBLIC_KEY
       );
@@ -505,7 +572,7 @@ function EarlyAccessForm() {
     return (
       <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-6">
         <div className="text-lg font-semibold">You’re on the list! 🎉</div>
-        <p className="mt-1 text-slate-300">We’ll email {submittedData?.name ? submittedData.name + ' ' : ''}at {submittedData?.email} with beta details.</p>
+  <p className="mt-1 text-slate-300">We’ll email {submittedData?.name ? submittedData.name + ' ' : ''}at {submittedData?.email} with beta details. {planInterest && <span className="block mt-2 text-xs text-slate-400">Noted interest in: {planInterest} plan.</span>}</p>
         <button onClick={() => { setSent(false); setSubmittedData(null); setError(null); }} className="mt-4 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-sm">Add another</button>
       </div>
     );

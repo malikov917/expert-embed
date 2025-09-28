@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Header from './Header';
 import PartnerUpWidget from './PartnerUpWidget';
 import { MessageSquare, Send, Hash, Rss } from 'lucide-react';

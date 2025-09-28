@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 
 const SubmitPage = () => {
   const [formData, setFormData] = useState({

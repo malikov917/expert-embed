@@ -11,7 +11,7 @@ const ideas = [
       title: "AutoGPT Studio",
       tagline: "Visual IDE for building autonomous AI agents without code",
       category: "Developer Tools",
-      description: "AutoGPT Studio is a visual IDE that allows you to build and deploy autonomous AI agents with no code. It provides a drag-and-drop interface to connect different AI models and tools, and to define the agent\'s behavior. It also includes a testing and debugging environment to ensure your agents work as expected.",
+      description: "AutoGPT Studio is a visual IDE that allows you to build and deploy autonomous AI agents with no code. It provides a drag-and-drop interface to connect different AI models and tools, and to define the agent's behavior. It also includes a testing and debugging environment to ensure your agents work as expected.",
       demoUrl: "#",
       githubUrl: "#"
     },

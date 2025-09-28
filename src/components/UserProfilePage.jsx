@@ -1,10 +1,8 @@
-import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from './Header';
-import { User, Rss, Github, Twitter, Building, Briefcase, Calendar, MapPin } from 'lucide-react';
+import { Rss, Github, Twitter, Calendar, MapPin } from 'lucide-react';
 
 const UserProfilePage = () => {
-  const { userId } = useParams();
 
   // Mock data for a user
   const user = {

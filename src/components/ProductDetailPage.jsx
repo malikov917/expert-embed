@@ -2,37 +2,14 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Header from './Header';
 import { 
-  Sparkles, 
   Users, 
-  MessageSquare, 
-  TrendingUp, 
   Code2, 
-  Rocket,
-  Github,
-  Twitter,
   ChevronUp,
-  Star,
-  Heart,
-  Eye,
-  ArrowUpRight,
-  Zap,
-  Building,
-  Lightbulb,
-  Trophy,
-  Clock,
   Hash,
-  Flame,
-  Award,
-  ExternalLink,
   Bot,
   Brain,
   Cpu,
   Sparkle,
-  Plus,
-  ArrowRight,
-  CheckCircle,
-  Circle,
-  Info
 } from 'lucide-react';
 
 // Simulated AI project ideas with realistic data (copied from LandingPage3.jsx)
@@ -53,7 +30,7 @@ const ideas = [
       tags: ["GPT-4", "No-Code", "Agents"],
       isLive: true,
       demoUrl: "#",
-      description: "AutoGPT Studio is a visual IDE that allows you to build and deploy autonomous AI agents with no code. It provides a drag-and-drop interface to connect different AI models and tools, and to define the agent\'s behavior. It also includes a testing and debugging environment to ensure your agents work as expected."
+      description: "AutoGPT Studio is a visual IDE that allows you to build and deploy autonomous AI agents with no code. It provides a drag-and-drop interface to connect different AI models and tools, and to define the agent's behavior. It also includes a testing and debugging environment to ensure your agents work as expected."
     },
     {
       id: 2,

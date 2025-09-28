@@ -1,23 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
 import { 
-  Sparkles, 
   Users, 
   MessageSquare, 
   TrendingUp, 
   Code2, 
   Rocket,
   Github,
-  Twitter,
   ChevronUp,
-  Star,
-  Heart,
-  Eye,
-  ArrowUpRight,
-  Zap,
-  Building,
-  Lightbulb,
   Trophy,
   Clock,
   Hash,
@@ -28,9 +19,7 @@ import {
   Brain,
   Cpu,
   Sparkle,
-  Plus,
   ArrowRight,
-  CheckCircle,
   Circle,
   User
 } from 'lucide-react';

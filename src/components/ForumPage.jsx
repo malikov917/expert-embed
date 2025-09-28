@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Header from './Header';
-import { MessageSquare, Plus, Send, Users, Hash, Rss } from 'lucide-react';
+import { MessageSquare, Send, Users, Hash, Rss } from 'lucide-react';
 
 const ForumPage = () => {
   const [posts, setPosts] = useState([

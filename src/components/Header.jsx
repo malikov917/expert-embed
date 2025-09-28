@@ -41,10 +41,10 @@ const Header = () => {
               <Plus className="w-4 h-4" />
               <span>Submit</span>
             </Link>
-            <button className="px-4 py-2 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors flex items-center space-x-2">
+            <Link to="/signin" className="px-4 py-2 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors flex items-center space-x-2">
               <Github className="w-4 h-4" />
               <span>Sign In</span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>

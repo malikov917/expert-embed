@@ -2,8 +2,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './components/LandingPage3.jsx';
 import AIToolsPage from './components/AIToolsPage.jsx';
 import ProductDetailPage from './components/ProductDetailPage.jsx';
+import ToolDetailPage from './components/ToolDetailPage.jsx';
 import ForumPage from './components/ForumPage.jsx';
 import SubmitPage from './components/SubmitPage.jsx';
+import SignInPage from './components/SignInPage.jsx';
 import './App.css';
 import { Analytics } from '@vercel/analytics/react';
 
@@ -15,8 +17,10 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/tools" element={<AIToolsPage />} />
           <Route path="/product/:id" element={<ProductDetailPage />} />
+          <Route path="/tool/:id" element={<ToolDetailPage />} />
           <Route path="/forum" element={<ForumPage />} />
           <Route path="/submit" element={<SubmitPage />} />
+          <Route path="/signin" element={<SignInPage />} />
         </Routes>
       </Router>
       <Analytics />

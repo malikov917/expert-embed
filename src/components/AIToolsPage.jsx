@@ -271,7 +271,7 @@ const AIToolsPage = () => {
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <Link to={`/product/${tool.id}`}>
+                              <Link to={`/tool/${tool.id}`}>
                                 <h3 className="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors cursor-pointer">
                                   {tool.title}
                                 </h3>
@@ -375,9 +375,9 @@ const AIToolsPage = () => {
               <p className="text-white/90 mb-4 text-sm">
                 Share your favorite AI tool and get it ranked by the community.
               </p>
-              <button className="w-full px-4 py-2 bg-white text-gray-900 rounded-lg font-medium hover:shadow-lg transform hover:scale-105 transition-all duration-200">
+              <Link to="/submit" className="w-full px-4 py-2 bg-white text-gray-900 rounded-lg font-medium hover:shadow-lg transform hover:scale-105 transition-all duration-200 block text-center">
                 Submit Tool →
-              </button>
+              </Link>
             </div>
 
             {/* Trending Makers */}

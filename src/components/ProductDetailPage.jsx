@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import Header from './Header';
 import { 
   Sparkles, 
   Users, 
@@ -30,7 +31,8 @@ import {
   Plus,
   ArrowRight,
   CheckCircle,
-  Circle
+  Circle,
+  Info
 } from 'lucide-react';
 
 // Simulated AI project ideas with realistic data (copied from LandingPage3.jsx)
@@ -130,10 +132,12 @@ const ideas = [
 const ProductDetailPage = () => {
   const { id } = useParams();
   const product = ideas.find(idea => idea.id === parseInt(id));
+  const [voted, setVoted] = useState(false);
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+        <Header />
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-900">Product not found</h1>
           <p className="text-lg text-gray-600 mt-2">The product you are looking for does not exist.</p>
@@ -147,76 +151,110 @@ const ProductDetailPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
-        <div className="bg-white rounded-xl shadow-lg p-8">
-          <div className="flex items-start gap-6">
-            <div className={`w-24 h-24 bg-gradient-to-br ${product.color} rounded-xl flex-shrink-0 flex items-center justify-center shadow-lg`}>
-              <product.icon className="w-12 h-12 text-white" />
-            </div>
-            <div className="flex-1">
-              <h1 className="text-4xl font-bold text-gray-900">{product.title}</h1>
-              <p className="text-xl text-gray-600 mt-2">{product.tagline}</p>
-              <div className="flex items-center gap-4 mt-4">
-                <div className="flex items-center gap-2">
-                  {product.tags.map((tag, i) => (
-                    <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-medium rounded-md">
-                      {tag}
-                    </span>
-                  ))}
+      <Header />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+        <div className="flex gap-8">
+          {/* Left Column */}
+          <div className="flex-1 space-y-8">
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              <div className="flex items-start gap-6">
+                <div className={`w-24 h-24 bg-gradient-to-br ${product.color} rounded-xl flex-shrink-0 flex items-center justify-center shadow-lg`}>
+                  <product.icon className="w-12 h-12 text-white" />
                 </div>
-                <span className="text-sm text-gray-500">{product.category}</span>
+                <div className="flex-1">
+                  <h1 className="text-4xl font-bold text-gray-900">{product.title}</h1>
+                  <p className="text-xl text-gray-600 mt-2">{product.tagline}</p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="mt-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Description</h2>
-            <p className="text-gray-700 leading-relaxed">{product.description}</p>
-          </div>
+            <div className="bg-white rounded-xl shadow-lg p-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">Description</h2>
+                <p className="text-gray-700 leading-relaxed">{product.description}</p>
+            </div>
 
-          <div className="mt-8 flex items-center justify-between bg-gray-100 rounded-xl p-6">
-            <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                    <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-sm text-white font-bold">
-                        {product.makerAvatar}
-                    </div>
-                    <div>
-                        <div className="font-bold text-gray-900">{product.maker}</div>
-                        <div className="text-sm text-gray-500">Maker</div>
-                    </div>
+            <div className="bg-white rounded-xl shadow-lg p-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">Screenshots</h2>
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-gray-200 rounded-lg h-48 flex items-center justify-center text-gray-500">Screenshot 1</div>
+                    <div className="bg-gray-200 rounded-lg h-48 flex items-center justify-center text-gray-500">Screenshot 2</div>
                 </div>
             </div>
-            <div className="flex items-center gap-4">
-                <button className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white text-lg font-medium rounded-xl transition-colors flex items-center gap-2">
-                    <ExternalLink className="w-5 h-5" />
-                    Visit
-                </button>
-                <button className="px-6 py-3 bg-gray-800 hover:bg-gray-900 text-white text-lg font-medium rounded-xl transition-colors flex items-center gap-2">
-                    <Github className="w-5 h-5" />
-                    Source Code
-                </button>
-            </div>
-          </div>
 
-          <div className="mt-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Comments ({product.comments})</h2>
-            {/* Add comments section here */}
-            <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-gray-200 rounded-full flex-shrink-0"></div>
-                    <div className="flex-1">
-                        <div className="bg-gray-100 rounded-xl p-4">
-                            <div className="flex items-center justify-between">
-                                <span className="font-bold text-gray-900">Commenter Name</span>
-                                <span className="text-sm text-gray-500">2 hours ago</span>
+            <div className="bg-white rounded-xl shadow-lg p-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Comments ({product.comments})</h2>
+                <div className="space-y-6">
+                    <div className="flex items-start gap-4">
+                        <div className="w-10 h-10 bg-gray-200 rounded-full flex-shrink-0"></div>
+                        <div className="flex-1">
+                            <div className="bg-gray-100 rounded-xl p-4">
+                                <div className="flex items-center justify-between">
+                                    <span className="font-bold text-gray-900">Commenter Name</span>
+                                    <span className="text-sm text-gray-500">2 hours ago</span>
+                                </div>
+                                <p className="text-gray-700 mt-2">This is a great idea! I would love to see this implemented.</p>
                             </div>
-                            <p className="text-gray-700 mt-2">This is a great idea! I would love to see this implemented.</p>
                         </div>
                     </div>
                 </div>
             </div>
           </div>
 
+          {/* Right Column */}
+          <div className="w-80 space-y-6">
+            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+                <button
+                    onClick={() => setVoted(!voted)}
+                    className={`w-full group flex flex-col items-center px-4 py-3 rounded-xl transition-all duration-200 ${voted ? 'bg-gradient-to-br from-orange-500 to-pink-500 text-white shadow-lg' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}>
+                    <ChevronUp className={`w-6 h-6 transition-transform duration-200 ${voted ? 'translate-y-0' : 'group-hover:-translate-y-1'}`} />
+                    <span className="font-bold text-2xl">
+                    {voted ? product.votes + 1 : product.votes}
+                    </span>
+                    <span className="text-sm font-medium">UPVOTE</span>
+                </button>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-lg p-6">
+                <h3 className="text-lg font-bold mb-4 flex items-center"><Users className="w-5 h-5 mr-2 text-gray-500"/>Maker</h3>
+                <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-xl text-white font-bold">
+                        {product.makerAvatar}
+                    </div>
+                    <div>
+                        <div className="text-lg font-medium">{product.maker}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-lg p-6">
+                <h3 className="text-lg font-bold mb-4 flex items-center"><Hash className="w-5 h-5 mr-2 text-gray-500"/>Info</h3>
+                <div className="space-y-3 text-sm">
+                    <div className="flex justify-between">
+                        <span className="text-gray-500">Category</span>
+                        <span className="font-medium text-gray-900">{product.category}</span>
+                    </div>
+                    <div className="flex justify-between">
+                        <span className="text-gray-500">Launched</span>
+                        <span className="font-medium text-gray-900">{product.timeAgo}</span>
+                    </div>
+                    <div className="flex justify-between">
+                        <span className="text-gray-500">Comments</span>
+                        <span className="font-medium text-gray-900">{product.comments}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-lg p-6">
+                <h3 className="text-lg font-bold mb-4 flex items-center"><Hash className="w-5 h-5 mr-2 text-gray-500"/>Tags</h3>
+                <div className="flex flex-wrap gap-2">
+                    {product.tags.map((tag, i) => (
+                    <span key={i} className="px-3 py-1.5 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg">
+                        {tag}
+                    </span>
+                    ))}
+                </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

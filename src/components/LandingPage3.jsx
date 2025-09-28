@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
+import PartnerUpWidget from './PartnerUpWidget';
 import { 
   Users, 
   MessageSquare, 
@@ -405,9 +406,9 @@ const LandingPage = () => {
               <p className="text-white/90 mb-4 text-sm">
                 Share your project and get instant feedback from 1000+ builders
               </p>
-              <button className="w-full px-4 py-2 bg-white text-gray-900 rounded-lg font-medium hover:shadow-lg transform hover:scale-105 transition-all duration-200">
+              <Link to="/submit" className="w-full px-4 py-2 bg-white text-gray-900 rounded-lg font-medium hover:shadow-lg transform hover:scale-105 transition-all duration-200 block text-center">
                 Launch Now →
-              </button>
+              </Link>
             </div>
 
             {/* Trending Makers */}
@@ -453,6 +454,7 @@ const LandingPage = () => {
                 ))}
               </div>
             </div>
+            <PartnerUpWidget />
 
             {/* Newsletter */}
             <div className="bg-gray-900 rounded-xl p-6 text-white">

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from './Header';
-import { MessageSquare, Send, Users, Hash, Rss } from 'lucide-react';
+import PartnerUpWidget from './PartnerUpWidget';
+import { MessageSquare, Send, Hash, Rss } from 'lucide-react';
 
 const ForumPage = () => {
   const [posts, setPosts] = useState([
@@ -29,7 +30,7 @@ const ForumPage = () => {
       author: 'Mike Johnson',
       authorAvatar: 'MJ',
       timeAgo: '3 days ago',
-      title: 'Searching for cheap ads for my new startup',
+      title: 'Searching for cheap ads for a new startup',
       content: 'I have just launched my new startup and I am looking for cheap ways to advertise it. Any recommendations for platforms or strategies for a small budget? Thanks in advance!',
       comments: 8,
       category: 'Advertising'
@@ -174,16 +175,7 @@ const ForumPage = () => {
 
           {/* Sidebar */}
           <aside className="w-80 space-y-6">
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-                <h3 className="text-lg font-bold mb-4 flex items-center">
-                    <Users className="w-5 h-5 mr-2 text-gray-500" />
-                    Partner Up!
-                </h3>
-                <p className="text-sm text-gray-600 mb-4">Let's partner each other and add each other as partners on websites.</p>
-                <button className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors">
-                    Learn More
-                </button>
-            </div>
+            <PartnerUpWidget />
             <div className="bg-white rounded-xl p-6 shadow-sm">
               <h3 className="text-lg font-bold mb-4 flex items-center">
                 <Hash className="w-5 h-5 mr-2 text-orange-500" />
@@ -213,7 +205,7 @@ const ForumPage = () => {
                 placeholder="Your email"
                 className="w-full px-4 py-2 bg-gray-100 rounded-lg text-gray-900 placeholder-gray-500 mb-3"
               />
-              <button className="w-full px-4 py-2 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors">
+              <button className="w-full px-4 py-2 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-100 transition-colors">
                 Subscribe
               </button>
             </div>

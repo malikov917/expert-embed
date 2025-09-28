@@ -33,97 +33,97 @@ import {
   Circle
 } from 'lucide-react';
 
-const LandingPage = () => {
+const AIToolsPage = () => {
   const [selectedTab, setSelectedTab] = useState('today');
   const [votedItems, setVotedItems] = useState(new Set());
   const [hoveredId, setHoveredId] = useState(null);
   const [animatedVotes, setAnimatedVotes] = useState({});
 
-  // Simulated AI project ideas with realistic data
-  const [ideas] = useState([
+  // Simulated AI tools with realistic data
+  const [tools] = useState([
     {
       id: 1,
       rank: 1,
-      title: "AutoGPT Studio",
-      tagline: "Visual IDE for building autonomous AI agents without code",
-      category: "Developer Tools",
-      icon: Bot,
-      color: "from-purple-500 to-blue-500",
-      votes: 524,
-      comments: 89,
-      maker: "Alex Chen",
-      makerAvatar: "AC",
-      timeAgo: "2 hours ago",
-      tags: ["GPT-4", "No-Code", "Agents"],
+      title: "RunwayML",
+      tagline: "AI video editing and generation tools for creators.",
+      category: "Video",
+      icon: Rocket,
+      color: "from-red-500 to-orange-500",
+      votes: 1204,
+      comments: 234,
+      maker: "Runway",
+      makerAvatar: "R",
+      timeAgo: "1 day ago",
+      tags: ["Video", "GenAI", "Creative"],
       isLive: true,
       demoUrl: "#"
     },
     {
       id: 2,
       rank: 2,
-      title: "NeuraLink API",
-      tagline: "Connect any LLM to your database with natural language",
-      category: "Infrastructure",
-      icon: Brain,
-      color: "from-green-500 to-emerald-500",
-      votes: 412,
-      comments: 67,
-      maker: "Sarah Kim",
-      makerAvatar: "SK",
-      timeAgo: "4 hours ago",
-      tags: ["API", "Database", "LLM"],
+      title: "Synthesia",
+      tagline: "Create AI videos by typing in text. No actors, cameras or mics.",
+      category: "Video",
+      icon: Bot,
+      color: "from-blue-500 to-cyan-500",
+      votes: 987,
+      comments: 189,
+      maker: "Synthesia",
+      makerAvatar: "S",
+      timeAgo: "3 days ago",
+      tags: ["Video", "Avatars", "Corporate"],
       isLive: true,
       demoUrl: "#"
     },
     {
       id: 3,
       rank: 3,
-      title: "CodeWhisper",
-      tagline: "AI pair programmer that learns your coding style",
-      category: "Productivity",
-      icon: Code2,
-      color: "from-orange-500 to-red-500",
-      votes: 389,
-      comments: 45,
-      maker: "Mike Johnson",
-      makerAvatar: "MJ",
-      timeAgo: "5 hours ago",
-      tags: ["Copilot", "IDE", "Learning"],
-      isLive: false,
+      title: "Jasper",
+      tagline: "AI Content Platform that helps you and your team create content.",
+      category: "Copywriting",
+      icon: Sparkle,
+      color: "from-green-500 to-teal-500",
+      votes: 854,
+      comments: 156,
+      maker: "Jasper",
+      makerAvatar: "J",
+      timeAgo: "2 days ago",
+      tags: ["Writing", "Marketing", "SEO"],
+      isLive: true,
       demoUrl: "#"
     },
     {
       id: 4,
       rank: 4,
-      title: "PromptForge",
-      tagline: "Collaborative prompt engineering platform with version control",
-      category: "Collaboration",
-      icon: Sparkle,
-      color: "from-pink-500 to-rose-500",
-      votes: 276,
-      comments: 34,
-      maker: "Emma Davis",
-      makerAvatar: "ED",
-      timeAgo: "6 hours ago",
-      tags: ["Prompts", "Teams", "Git"],
+      title: "Midjourney",
+      tagline: "An independent research lab exploring new mediums of thought and expanding the imaginative powers of the human species.",
+      category: "Image Generation",
+      icon: Brain,
+      color: "from-purple-500 to-indigo-500",
+      votes: 789,
+      comments: 132,
+      maker: "Midjourney",
+      makerAvatar: "M",
+      timeAgo: "5 days ago",
+      tags: ["Images", "Art", "Creative"],
       isLive: true,
       demoUrl: "#"
     },
     {
       id: 5,
       rank: 5,
-      title: "AI Model Zoo",
-      tagline: "Marketplace for fine-tuned models with one-click deploy",
-      category: "Marketplace",
+      title: "Fireflies.ai",
+      tagline: "AI assistant for your meetings. Record, transcribe, and search across your voice conversations.",
+      category: "Productivity",
       icon: Cpu,
-      color: "from-indigo-500 to-purple-500",
-      votes: 198,
-      comments: 28,
-      maker: "Jason Liu",
-      makerAvatar: "JL",
-      timeAgo: "8 hours ago",
-      tags: ["Models", "Deploy", "Marketplace"],
-      isLive: false,
+      color: "from-yellow-500 to-amber-500",
+      votes: 642,
+      comments: 98,
+      maker: "Fireflies.ai",
+      makerAvatar: "F",
+      timeAgo: "4 days ago",
+      tags: ["Meetings", "Transcription", "Productivity"],
+      isLive: true,
       demoUrl: "#"
     }
   ]);
@@ -144,10 +144,10 @@ const LandingPage = () => {
   };
 
   const stats = [
-    { label: "Launching Soon", value: "12", icon: Rocket },
-    { label: "Active Today", value: "89", icon: Flame },
-    { label: "This Week", value: "234", icon: TrendingUp },
-    { label: "Contributors", value: "1.2k", icon: Users }
+    { label: "New Tools", value: "23", icon: Rocket },
+    { label: "Active Today", value: "150", icon: Flame },
+    { label: "This Week", value: "450", icon: TrendingUp },
+    { label: "Users", value: "2.5k", icon: Users }
   ];
 
   return (
@@ -158,12 +158,12 @@ const LandingPage = () => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-8">
               <div className="flex items-center space-x-3">
-                <div className="w-9 h-9 bg-gradient-to-br from-orange-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
+                <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg">
                   <Sparkles className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <span className="text-xl font-bold text-gray-900">AI Launch</span>
-                  <span className="text-xs text-gray-500 block -mt-1">Build Together</span>
+                  <span className="text-xl font-bold text-gray-900">AI Tools</span>
+                  <span className="text-xs text-gray-500 block -mt-1">Discover & Rank</span>
                 </div>
               </div>
               
@@ -184,7 +184,7 @@ const LandingPage = () => {
               <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                 <MessageSquare className="w-5 h-5 text-gray-600" />
               </button>
-              <button className="px-4 py-2 bg-gradient-to-r from-orange-500 to-pink-500 text-white rounded-lg font-medium hover:shadow-lg transform hover:scale-105 transition-all duration-200 flex items-center space-x-2">
+              <button className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg font-medium hover:shadow-lg transform hover:scale-105 transition-all duration-200 flex items-center space-x-2">
                 <Plus className="w-4 h-4" />
                 <span>Submit</span>
               </button>
@@ -198,18 +198,18 @@ const LandingPage = () => {
       </header>
 
       {/* Hero Banner */}
-      <section className="bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 text-white">
+      <section className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
           <div className="text-center">
             <div className="inline-flex items-center px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-4">
-              <Flame className="w-4 h-4 mr-2" />
-              🎉 Welcome to the Future of AI Building
+              <Trophy className="w-4 h-4 mr-2" />
+              🏆 Discover the Best AI Tools
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Launch Your AI Product Today
+              Community-Ranked AI Tools
             </h1>
             <p className="text-xl opacity-90 max-w-2xl mx-auto mb-8">
-              Get feedback, find collaborators, and build in public. The community-driven platform for AI builders.
+              Explore a curated list of the most popular AI tools, submitted and ranked by the community.
             </p>
             
             {/* Quick Stats */}
@@ -241,7 +241,7 @@ const LandingPage = () => {
                     onClick={() => setSelectedTab('today')}
                     className={`px-4 py-2 rounded-lg font-medium transition-all ${
                       selectedTab === 'today' 
-                        ? 'bg-orange-100 text-orange-600' 
+                        ? 'bg-blue-100 text-blue-600' 
                         : 'text-gray-600 hover:bg-gray-100'
                     }`}
                   >
@@ -254,7 +254,7 @@ const LandingPage = () => {
                     onClick={() => setSelectedTab('week')}
                     className={`px-4 py-2 rounded-lg font-medium transition-all ${
                       selectedTab === 'week' 
-                        ? 'bg-orange-100 text-orange-600' 
+                        ? 'bg-blue-100 text-blue-600' 
                         : 'text-gray-600 hover:bg-gray-100'
                     }`}
                   >
@@ -267,7 +267,7 @@ const LandingPage = () => {
                     onClick={() => setSelectedTab('all')}
                     className={`px-4 py-2 rounded-lg font-medium transition-all ${
                       selectedTab === 'all' 
-                        ? 'bg-orange-100 text-orange-600' 
+                        ? 'bg-blue-100 text-blue-600' 
                         : 'text-gray-600 hover:bg-gray-100'
                     }`}
                   >
@@ -283,13 +283,13 @@ const LandingPage = () => {
               </div>
             </div>
 
-            {/* Ideas List - The Main Table */}
+            {/* Tools List - The Main Table */}
             <div className="space-y-4">
-              {ideas.map((idea) => (
+              {tools.map((tool) => (
                 <div 
-                  key={idea.id}
+                  key={tool.id}
                   className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200"
-                  onMouseEnter={() => setHoveredId(idea.id)}
+                  onMouseEnter={() => setHoveredId(tool.id)}
                   onMouseLeave={() => setHoveredId(null)}
                 >
                   <div className="p-6">
@@ -297,14 +297,14 @@ const LandingPage = () => {
                       {/* Rank Badge */}
                       <div className="flex-shrink-0">
                         <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center font-bold text-gray-600">
-                          #{idea.rank}
+                          #{tool.rank}
                         </div>
                       </div>
 
                       {/* Project Icon */}
                       <div className="flex-shrink-0">
-                        <div className={`w-14 h-14 bg-gradient-to-br ${idea.color} rounded-xl flex items-center justify-center shadow-lg transform ${hoveredId === idea.id ? 'scale-110 rotate-3' : ''} transition-all duration-200`}>
-                          <idea.icon className="w-7 h-7 text-white" />
+                        <div className={`w-14 h-14 bg-gradient-to-br ${tool.color} rounded-xl flex items-center justify-center shadow-lg transform ${hoveredId === tool.id ? 'scale-110 rotate-3' : ''} transition-all duration-200`}>
+                          <tool.icon className="w-7 h-7 text-white" />
                         </div>
                       </div>
 
@@ -313,24 +313,24 @@ const LandingPage = () => {
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <Link to={`/product/${idea.id}`}>
-                                <h3 className="text-lg font-bold text-gray-900 hover:text-orange-600 transition-colors cursor-pointer">
-                                  {idea.title}
+                              <Link to={`/product/${tool.id}`}>
+                                <h3 className="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors cursor-pointer">
+                                  {tool.title}
                                 </h3>
                               </Link>
-                              {idea.isLive && (
+                              {tool.isLive && (
                                 <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-medium rounded-full flex items-center">
                                   <Circle className="w-2 h-2 mr-1 fill-current" />
                                   LIVE
                                 </span>
                               )}
                             </div>
-                            <p className="text-gray-600 mb-3">{idea.tagline}</p>
+                            <p className="text-gray-600 mb-3">{tool.tagline}</p>
                             
                             {/* Tags and Meta */}
                             <div className="flex items-center gap-4 flex-wrap">
                               <div className="flex items-center gap-2">
-                                {idea.tags.map((tag, i) => (
+                                {tool.tags.map((tag, i) => (
                                   <span key={i} className="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-medium rounded-md transition-colors cursor-pointer">
                                     {tag}
                                   </span>
@@ -340,12 +340,12 @@ const LandingPage = () => {
                               <div className="flex items-center gap-3 text-sm text-gray-500">
                                 <span className="flex items-center gap-1">
                                   <MessageSquare className="w-4 h-4" />
-                                  {idea.comments}
+                                  {tool.comments}
                                 </span>
                                 <span>•</span>
-                                <span>{idea.category}</span>
+                                <span>{tool.category}</span>
                                 <span>•</span>
-                                <span>{idea.timeAgo}</span>
+                                <span>{tool.timeAgo}</span>
                               </div>
                             </div>
                           </div>
@@ -353,46 +353,42 @@ const LandingPage = () => {
                           {/* Vote Button */}
                           <div className="flex flex-col items-center ml-4">
                             <button
-                              onClick={() => handleVote(idea.id)}
+                              onClick={() => handleVote(tool.id)}
                               className={`group flex flex-col items-center px-4 py-3 rounded-xl transition-all duration-200 ${
-                                votedItems.has(idea.id)
-                                  ? 'bg-gradient-to-br from-orange-500 to-pink-500 text-white shadow-lg'
+                                votedItems.has(tool.id)
+                                  ? 'bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-lg'
                                   : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
                               }`}
                             >
                               <ChevronUp className={`w-5 h-5 transition-transform duration-200 ${
-                                votedItems.has(idea.id) ? 'translate-y-0' : 'group-hover:-translate-y-1'
-                              } ${animatedVotes[idea.id] ? 'animate-bounce' : ''}`} />
+                                votedItems.has(tool.id) ? 'translate-y-0' : 'group-hover:-translate-y-1'
+                              } ${animatedVotes[tool.id] ? 'animate-bounce' : ''}`} />
                               <span className="font-bold text-lg">
-                                {votedItems.has(idea.id) ? idea.votes + 1 : idea.votes}
+                                {votedItems.has(tool.id) ? tool.votes + 1 : tool.votes}
                               </span>
                             </button>
                             
                             {/* Maker Info */}
                             <div className="mt-3 flex items-center gap-2">
-                              <div className="w-6 h-6 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-xs text-white font-medium">
-                                {idea.makerAvatar}
+                              <div className="w-6 h-6 bg-gradient-to-br from-gray-400 to-gray-500 rounded-full flex items-center justify-center text-xs text-white font-medium">
+                                {tool.makerAvatar}
                               </div>
-                              <span className="text-xs text-gray-500">{idea.maker}</span>
+                              <span className="text-xs text-gray-500">{tool.maker}</span>
                             </div>
                           </div>
                         </div>
 
                         {/* Action Buttons (visible on hover) */}
                         <div className="h-12 flex items-center">
-                          {hoveredId === idea.id && (
+                          {hoveredId === tool.id && (
                             <div className="flex items-center gap-2 animate-fadeIn">
-                              <button className="px-3 py-1.5 bg-orange-100 hover:bg-orange-200 text-orange-700 text-sm font-medium rounded-lg transition-colors flex items-center gap-1">
+                              <button className="px-3 py-1.5 bg-blue-100 hover:bg-blue-200 text-blue-700 text-sm font-medium rounded-lg transition-colors flex items-center gap-1">
                                 <ExternalLink className="w-3 h-3" />
-                                Try Demo
+                                Visit Tool
                               </button>
                               <button className="px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-700 text-sm font-medium rounded-lg transition-colors flex items-center gap-1">
-                                <Github className="w-3 h-3" />
-                                View Code
-                              </button>
-                              <button className="px-3 py-1.5 bg-blue-100 hover:bg-blue-200 text-blue-700 text-sm font-medium rounded-lg transition-colors flex items-center gap-1">
-                                <Users className="w-3 h-3" />
-                                Join Team
+                                <MessageSquare className="w-3 h-3" />
+                                Comments
                               </button>
                             </div>
                           )}
@@ -407,7 +403,7 @@ const LandingPage = () => {
             {/* Load More */}
             <div className="mt-8 text-center">
               <button className="px-6 py-3 bg-white hover:bg-gray-50 text-gray-700 font-medium rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex items-center mx-auto">
-                Load More Ideas
+                Load More Tools
                 <ArrowRight className="w-4 h-4 ml-2" />
               </button>
             </div>
@@ -416,13 +412,13 @@ const LandingPage = () => {
           {/* Sidebar */}
           <aside className="w-80 space-y-6">
             {/* Launch Your Project CTA */}
-            <div className="bg-gradient-to-br from-orange-500 to-pink-500 rounded-xl p-6 text-white">
-              <h3 className="text-xl font-bold mb-2">Got an AI idea?</h3>
+            <div className="bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl p-6 text-white">
+              <h3 className="text-xl font-bold mb-2">Submit an AI Tool</h3>
               <p className="text-white/90 mb-4 text-sm">
-                Share your project and get instant feedback from 1000+ builders
+                Share your favorite AI tool and get it ranked by the community.
               </p>
               <button className="w-full px-4 py-2 bg-white text-gray-900 rounded-lg font-medium hover:shadow-lg transform hover:scale-105 transition-all duration-200">
-                Launch Now →
+                Submit Tool →
               </button>
             </div>
 
@@ -430,10 +426,10 @@ const LandingPage = () => {
             <div className="bg-white rounded-xl p-6 shadow-sm">
               <h3 className="text-lg font-bold mb-4 flex items-center">
                 <Trophy className="w-5 h-5 mr-2 text-yellow-500" />
-                Top Builders
+                Top Contributors
               </h3>
               <div className="space-y-3">
-                {['Sarah Chen', 'Mike Park', 'Alex Kumar'].map((name, i) => (
+                {['Chris Bakke', 'Sahil Lavingia', 'Jane Doe'].map((name, i) => (
                   <div key={i} className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-xs text-white font-bold">
@@ -441,7 +437,7 @@ const LandingPage = () => {
                       </div>
                       <div>
                         <div className="text-sm font-medium">{name}</div>
-                        <div className="text-xs text-gray-500">{3 - i} launches</div>
+                        <div className="text-xs text-gray-500">{20 - i*5} submissions</div>
                       </div>
                     </div>
                     <button className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-medium rounded-lg transition-colors">
@@ -455,14 +451,14 @@ const LandingPage = () => {
             {/* Categories */}
             <div className="bg-white rounded-xl p-6 shadow-sm">
               <h3 className="text-lg font-bold mb-4 flex items-center">
-                <Hash className="w-5 h-5 mr-2 text-orange-500" />
-                Hot Categories
+                <Hash className="w-5 h-5 mr-2 text-blue-500" />
+                Tool Categories
               </h3>
               <div className="flex flex-wrap gap-2">
-                {['Developer Tools', 'Agents', 'APIs', 'No-Code', 'Infrastructure', 'Models'].map((cat) => (
+                {['Video', 'Copywriting', 'Image Generation', 'Productivity', 'Avatars', 'Marketing', 'Transcription'].map((cat) => (
                   <button
                     key={cat}
-                    className="px-3 py-1.5 bg-gray-100 hover:bg-orange-100 hover:text-orange-600 text-gray-700 text-sm font-medium rounded-lg transition-colors"
+                    className="px-3 py-1.5 bg-gray-100 hover:bg-blue-100 hover:text-blue-600 text-gray-700 text-sm font-medium rounded-lg transition-colors"
                   >
                     {cat}
                   </button>
@@ -474,7 +470,7 @@ const LandingPage = () => {
             <div className="bg-gray-900 rounded-xl p-6 text-white">
               <h3 className="text-lg font-bold mb-2">Daily AI Digest</h3>
               <p className="text-gray-400 text-sm mb-4">
-                Get the best AI projects in your inbox every morning
+                Get the best AI tools in your inbox every morning.
               </p>
               <input
                 type="email"
@@ -509,4 +505,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default AIToolsPage;

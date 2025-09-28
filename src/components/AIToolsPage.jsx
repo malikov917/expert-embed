@@ -54,6 +54,7 @@ const AIToolsPage = () => {
       comments: 234,
       maker: "Runway",
       makerAvatar: "R",
+      makerId: 6,
       timeAgo: "1 day ago",
       tags: ["Video", "GenAI", "Creative"],
       isLive: true,
@@ -71,6 +72,7 @@ const AIToolsPage = () => {
       comments: 189,
       maker: "Synthesia",
       makerAvatar: "S",
+      makerId: 7,
       timeAgo: "3 days ago",
       tags: ["Video", "Avatars", "Corporate"],
       isLive: true,
@@ -88,6 +90,7 @@ const AIToolsPage = () => {
       comments: 156,
       maker: "Jasper",
       makerAvatar: "J",
+      makerId: 8,
       timeAgo: "2 days ago",
       tags: ["Writing", "Marketing", "SEO"],
       isLive: true,
@@ -105,6 +108,7 @@ const AIToolsPage = () => {
       comments: 132,
       maker: "Midjourney",
       makerAvatar: "M",
+      makerId: 9,
       timeAgo: "5 days ago",
       tags: ["Images", "Art", "Creative"],
       isLive: true,
@@ -122,6 +126,7 @@ const AIToolsPage = () => {
       comments: 98,
       maker: "Fireflies.ai",
       makerAvatar: "F",
+      makerId: 10,
       timeAgo: "4 days ago",
       tags: ["Meetings", "Transcription", "Productivity"],
       isLive: true,
@@ -327,12 +332,12 @@ const AIToolsPage = () => {
                             </button>
                             
                             {/* Maker Info */}
-                            <div className="mt-3 flex items-center gap-2">
+                            <Link to={`/user/${tool.makerId}`} className="mt-3 flex items-center gap-2 group">
                               <div className="w-6 h-6 bg-gradient-to-br from-gray-400 to-gray-500 rounded-full flex items-center justify-center text-xs text-white font-medium">
                                 {tool.makerAvatar}
                               </div>
-                              <span className="text-xs text-gray-500">{tool.maker}</span>
-                            </div>
+                              <span className="text-xs text-gray-500 group-hover:text-blue-600">{tool.maker}</span>
+                            </Link>
                           </div>
                         </div>
 

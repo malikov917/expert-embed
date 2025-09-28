@@ -31,7 +31,8 @@ import {
   Plus,
   ArrowRight,
   CheckCircle,
-  Circle
+  Circle,
+  User
 } from 'lucide-react';
 
 const LandingPage = () => {
@@ -54,6 +55,7 @@ const LandingPage = () => {
       comments: 89,
       maker: "Alex Chen",
       makerAvatar: "AC",
+      makerId: 1,
       timeAgo: "2 hours ago",
       tags: ["GPT-4", "No-Code", "Agents"],
       isLive: true,
@@ -71,6 +73,7 @@ const LandingPage = () => {
       comments: 67,
       maker: "Sarah Kim",
       makerAvatar: "SK",
+      makerId: 2,
       timeAgo: "4 hours ago",
       tags: ["API", "Database", "LLM"],
       isLive: true,
@@ -88,6 +91,7 @@ const LandingPage = () => {
       comments: 45,
       maker: "Mike Johnson",
       makerAvatar: "MJ",
+      makerId: 3,
       timeAgo: "5 hours ago",
       tags: ["Copilot", "IDE", "Learning"],
       isLive: false,
@@ -105,6 +109,7 @@ const LandingPage = () => {
       comments: 34,
       maker: "Emma Davis",
       makerAvatar: "ED",
+      makerId: 4,
       timeAgo: "6 hours ago",
       tags: ["Prompts", "Teams", "Git"],
       isLive: true,
@@ -122,12 +127,25 @@ const LandingPage = () => {
       comments: 28,
       maker: "Jason Liu",
       makerAvatar: "JL",
+      makerId: 5,
       timeAgo: "8 hours ago",
       tags: ["Models", "Deploy", "Marketplace"],
       isLive: false,
       demoUrl: "#"
     }
   ]);
+
+  const [filteredIdeas, setFilteredIdeas] = useState(ideas);
+  const currentUser = { id: 1 }; // Mock current user
+
+  useEffect(() => {
+    if (selectedTab === 'my-projects') {
+      setFilteredIdeas(ideas.filter(idea => idea.makerId === currentUser.id));
+    } else {
+      // Here you would filter by today, week, all
+      setFilteredIdeas(ideas);
+    }
+  }, [selectedTab, ideas, currentUser.id]);
 
   const handleVote = (id) => {
     const newVoted = new Set(votedItems);
@@ -234,6 +252,19 @@ const LandingPage = () => {
                       <span>All Time</span>
                     </div>
                   </button>
+                  <button
+                    onClick={() => setSelectedTab('my-projects')}
+                    className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                      selectedTab === 'my-projects' 
+                        ? 'bg-orange-100 text-orange-600' 
+                        : 'text-gray-600 hover:bg-gray-100'
+                    }`}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <User className="w-4 h-4" />
+                      <span>My Projects</span>
+                    </div>
+                  </button>
                 </div>
                 <button className="text-sm text-gray-500 hover:text-gray-700 font-medium">
                   Filter
@@ -243,7 +274,7 @@ const LandingPage = () => {
 
             {/* Ideas List - The Main Table */}
             <div className="space-y-4">
-              {ideas.map((idea) => (
+              {filteredIdeas.map((idea) => (
                 <div 
                   key={idea.id}
                   className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200"
@@ -327,12 +358,12 @@ const LandingPage = () => {
                             </button>
                             
                             {/* Maker Info */}
-                            <div className="mt-3 flex items-center gap-2">
+                            <Link to={`/user/${idea.makerId}`} className="mt-3 flex items-center gap-2 group">
                               <div className="w-6 h-6 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-xs text-white font-medium">
                                 {idea.makerAvatar}
                               </div>
-                              <span className="text-xs text-gray-500">{idea.maker}</span>
-                            </div>
+                              <span className="text-xs text-gray-500 group-hover:text-orange-600">{idea.maker}</span>
+                            </Link>
                           </div>
                         </div>
 
@@ -352,6 +383,12 @@ const LandingPage = () => {
                                 <Users className="w-3 h-3" />
                                 Join Team
                               </button>
+                              {currentUser.id === idea.makerId && (
+                                <Link to={`/edit/${idea.id}`} className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium rounded-lg transition-colors flex items-center gap-1">
+                                  <ExternalLink className="w-3 h-3" />
+                                  Edit
+                                </Link>
+                              )}
                             </div>
                           )}
                         </div>
